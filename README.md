@@ -1,2 +1,79 @@
-# steveballmer-interview-question-analysis
-This Python script simulates the classic Steve Ballmer interview challenge: guess a random number between 1 and 100 using only feedback of "high", "low", or "correct". The code implements an efficient binary search strategy and runs the game 1,000,000 times to analyze the distribution of guesses needed.
+# 🎯 Steve Ballmer Guessing Game — Binary Search Simulation
+
+This project implements and analyzes the famous **Steve Ballmer interview question**, which challenges candidates to guess a number between 1 and 100 with only three types of feedback: `"high"`, `"low"`, or `"correct"`. The goal is to guess the number in as few tries as possible using a logical and efficient strategy.
+
+This repository takes that simple problem and expands it into a **high-scale simulation** — running the guessing process **1,000,000 times** and analyzing the distribution of the number of guesses needed using binary search.
+
+---
+
+## 🧠 The Original Question
+
+> "If I pick a number between 1 and 100, and you can only ask whether your guess is high, low, or correct — how many tries will it take to guess it?"
+
+This classic interview challenge, attributed to former Microsoft CEO **Steve Ballmer**, tests your ability to think in terms of **algorithmic efficiency**, **logic under constraints**, and **edge-case handling**.
+
+It’s deceptively simple — yet how you approach it says a lot about how you solve problems.
+
+---
+
+## 🚀 What This Project Does
+
+This Python simulation does three main things:
+
+1. **Implements an efficient guessing algorithm** using binary search logic.
+2. **Runs the algorithm 1,000,000 times**, each time with a randomly chosen number between 1 and 100.
+3. **Visualizes the results** in a histogram showing how many guesses were typically needed.
+
+It also includes:
+- A `safety net` to prevent infinite loops or off-by-one errors when the search window collapses.
+- Clean plotting with `matplotlib` and performance tracking with `collections.Counter`.
+
+---
+
+## 🧩 How It Works
+
+### Core Algorithm
+
+The strategy used is binary search:
+- Start with the full range: `0 to 100`.
+- Guess the midpoint.
+- Based on feedback (`"high"` or `"low"`), shrink the range.
+- Repeat until the guess is `"correct"`.
+
+This method guarantees that the number will be found in **no more than 7 guesses** — since `log₂(100)` is approximately 6.64.
+
+### Safety Net
+
+If the search range collapses (i.e. the high and low bounds are within 1 of each other), the code forces a break by setting the guess to the correct answer directly. This prevents stalling or getting caught in edge cases where integer division prevents further narrowing.
+
+---
+
+## 📊 Simulation & Visualization
+
+The script runs the guessing game 1,000,000 times with randomly generated numbers, and for each run:
+- Records how many guesses it took
+- Aggregates results in a histogram
+- Visualizes the distribution
+
+This gives insight into the **frequency of each guess count** and validates the algorithm's consistency.
+
+Example of what you'll see:
+```
+Most common number of guesses: 7
+Rare edge cases needing 8 guesses
+No run takes more than 8 guesses (as expected for binary search)
+```
+
+---
+
+## 📈 Why This Matters
+
+This exercise may seem basic, but it touches on several core CS principles:
+
+- **Binary Search** – foundational search algorithm
+- **Control flow and branching logic**
+- **Error handling and edge-case safety**
+- **Statistical thinking through simulation**
+- **Visualization to extract insights from raw data**
+
+It’s a great warm-up project for interview prep, teaching, or exploring algorithmic behavior at scale.
